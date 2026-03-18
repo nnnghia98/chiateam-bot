@@ -288,7 +288,8 @@ body {
 
 .team-card-home { border-top: 4px solid var(--accent); }
 .team-card-away { border-top: 4px solid #37474f; }
-[data-theme="dark"] .team-card-away { border-top: 4px solid #90a4ae; }
+[data-theme="dark"] .team-card-home { border-top: 4px solid #ffffff; }
+[data-theme="dark"] .team-card-away { border-top: 4px solid #ef5350; }
 .team-card-extra { border-top: 4px solid var(--accent-orange); }
 
 /* Team Header */
@@ -310,7 +311,8 @@ body {
 
 .team-name.home-name { color: var(--accent); }
 .team-name.away-name { color: #37474f; }
-[data-theme="dark"] .team-name.away-name { color: #90a4ae; }
+[data-theme="dark"] .team-name.home-name { color: #ffffff; }
+[data-theme="dark"] .team-name.away-name { color: #ef5350; }
 .team-name.extra-name { color: var(--accent-orange); }
 
 .team-count {
@@ -332,9 +334,13 @@ body {
   background: rgba(55,71,79,0.08);
   color: #37474f;
 }
+[data-theme="dark"] .team-count.home {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+}
 [data-theme="dark"] .team-count.away {
-  background: rgba(144,164,174,0.1);
-  color: #90a4ae;
+  background: rgba(239,83,80,0.12);
+  color: #ef5350;
 }
 
 .team-count.extra {

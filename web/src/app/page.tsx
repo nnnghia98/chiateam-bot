@@ -81,8 +81,8 @@ const JERSEY_COLORS_LIGHT = {
 };
 
 const JERSEY_COLORS_DARK = {
-  home:  { fill: '#2a0000', stroke: '#ef5350', text: '#ff8a80', collar: '#ef5350' },
-  away:  { fill: '#37474f', stroke: '#78909c', text: '#eceff1', collar: '#546e7a' },
+  home:  { fill: '#37474f', stroke: '#78909c', text: '#eceff1', collar: '#546e7a' },
+  away:  { fill: '#2a0000', stroke: '#ef5350', text: '#ff8a80', collar: '#ef5350' },
   extra: { fill: '#e65100', stroke: '#ff9800', text: '#ffffff', collar: '#ef6c00' },
 };
 
@@ -145,8 +145,8 @@ function TeamCard({ team, index, playerConfigs, isDark }: { team: Team; index: n
             fontWeight: 500,
             padding: '2px 8px',
             borderRadius: '6px',
-            background: color === 'home' ? 'rgba(198,40,40,0.08)' : color === 'away' ? 'rgba(55,71,79,0.08)' : 'rgba(239,108,0,0.08)',
-            color: color === 'home' ? 'var(--accent)' : color === 'away' ? (isDark ? '#90a4ae' : '#37474f') : 'var(--accent-orange)',
+            background: color === 'home' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(198,40,40,0.08)') : color === 'away' ? (isDark ? 'rgba(239,83,80,0.12)' : 'rgba(55,71,79,0.08)') : 'rgba(239,108,0,0.08)',
+            color: color === 'home' ? (isDark ? '#ffffff' : 'var(--accent)') : color === 'away' ? (isDark ? '#ef5350' : '#37474f') : 'var(--accent-orange)',
           }}>
             Áo {tooltip}
           </span>
