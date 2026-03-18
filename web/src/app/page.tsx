@@ -74,15 +74,21 @@ function findMatchingPlayer(playerName: string, telegramHandle: string | undefin
    JERSEY ICONS
    ============================================= */
 
-const JERSEY_COLORS = {
-  home:  { fill: '#ffffff', stroke: '#43a047', text: '#2e7d32', collar: '#43a047' },
+const JERSEY_COLORS_LIGHT = {
+  home:  { fill: '#ffffff', stroke: '#e53935', text: '#c62828', collar: '#e53935' },
   away:  { fill: '#263238', stroke: '#455a64', text: '#ffffff', collar: '#37474f' },
   extra: { fill: '#ef6c00', stroke: '#e65100', text: '#ffffff', collar: '#bf360c' },
 };
 
+const JERSEY_COLORS_DARK = {
+  home:  { fill: '#2a0000', stroke: '#ef5350', text: '#ff8a80', collar: '#ef5350' },
+  away:  { fill: '#37474f', stroke: '#78909c', text: '#eceff1', collar: '#546e7a' },
+  extra: { fill: '#e65100', stroke: '#ff9800', text: '#ffffff', collar: '#ef6c00' },
+};
+
 /** Small jersey icon for team headers (no text) */
-function SmallJerseyIcon({ team }: { team: 'home' | 'away' | 'extra' }) {
-  const c = JERSEY_COLORS[team];
+function SmallJerseyIcon({ team, isDark }: { team: 'home' | 'away' | 'extra'; isDark: boolean }) {
+  const c = (isDark ? JERSEY_COLORS_DARK : JERSEY_COLORS_LIGHT)[team];
   return (
     <svg viewBox="0 0 48 48" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M14 12L8 16V22L10 23V40C10 41.1 10.9 42 12 42H36C37.1 42 38 41.1 38 40V23L40 22V16L34 12H14Z"
@@ -98,8 +104,8 @@ function SmallJerseyIcon({ team }: { team: 'home' | 'away' | 'extra' }) {
 }
 
 /** Player jersey icon with label (number or initials) */
-function JerseyIcon({ label, team }: { label: string; team: 'home' | 'away' | 'extra' }) {
-  const c = JERSEY_COLORS[team];
+function JerseyIcon({ label, team, isDark }: { label: string; team: 'home' | 'away' | 'extra'; isDark: boolean }) {
+  const c = (isDark ? JERSEY_COLORS_DARK : JERSEY_COLORS_LIGHT)[team];
   return (
     <div className="jersey-container">
       <svg viewBox="0 0 48 48" width="42" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +129,7 @@ function JerseyIcon({ label, team }: { label: string; team: 'home' | 'away' | 'e
    TEAM CARD
    ============================================= */
 
-function TeamCard({ team, index, playerConfigs }: { team: Team; index: number; playerConfigs: PlayerConfig[] }) {
+function TeamCard({ team, index, playerConfigs, isDark }: { team: Team; index: number; playerConfigs: PlayerConfig[]; isDark: boolean }) {
   const color = getTeamColor(team.name);
   const borderClass = getTeamBorderClass(team.name);
   const tooltip = getTeamTooltip(team.name);
@@ -132,15 +138,15 @@ function TeamCard({ team, index, playerConfigs }: { team: Team; index: number; p
     <div className={`glass-card ${borderClass}`} style={{ animationDelay: `${index * 0.08}s` }}>
       <div className="team-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <SmallJerseyIcon team={color} />
+          <SmallJerseyIcon team={color} isDark={isDark} />
           <h2 className={`team-name ${color}-name`}>{team.name}</h2>
           <span style={{
             fontSize: '11px',
             fontWeight: 500,
             padding: '2px 8px',
             borderRadius: '6px',
-            background: color === 'home' ? 'rgba(46,125,50,0.08)' : color === 'away' ? 'rgba(55,71,79,0.08)' : 'rgba(239,108,0,0.08)',
-            color: color === 'home' ? '#2e7d32' : color === 'away' ? '#37474f' : '#ef6c00',
+            background: color === 'home' ? 'rgba(198,40,40,0.08)' : color === 'away' ? 'rgba(55,71,79,0.08)' : 'rgba(239,108,0,0.08)',
+            color: color === 'home' ? 'var(--accent)' : color === 'away' ? (isDark ? '#90a4ae' : '#37474f') : 'var(--accent-orange)',
           }}>
             Áo {tooltip}
           </span>
@@ -164,7 +170,7 @@ function TeamCard({ team, index, playerConfigs }: { team: Team; index: number; p
           return (
             <div key={i} className="player-item" style={{ animationDelay: `${(index * 0.08) + (i * 0.04)}s` }}>
               <div className="player-number">{i + 1}</div>
-              <JerseyIcon label={jerseyLabel} team={color} />
+              <JerseyIcon label={jerseyLabel} team={color} isDark={isDark} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
                   fontSize: '14px',
@@ -271,6 +277,24 @@ export default function Home() {
   const [playerConfigs, setPlayerConfigs] = useState<PlayerConfig[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('football-theme');
+    if (saved === 'dark') {
+      setIsDark(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setIsDark(prev => {
+      const next = !prev;
+      document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
+      localStorage.setItem('football-theme', next ? 'dark' : 'light');
+      return next;
+    });
+  }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -296,6 +320,11 @@ export default function Home() {
 
   return (
     <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
+      {/* Theme Toggle */}
+      <button className="theme-toggle" onClick={toggleTheme} title={isDark ? 'Chuyển sang sáng' : 'Chuyển sang tối'}>
+        {isDark ? '☀️' : '🌙'}
+      </button>
+
       {/* Header */}
       <header className="field-header">
         <div className="field-corner-tl" />
@@ -346,13 +375,13 @@ export default function Home() {
             {/* Stats */}
             <div className="stat-bar" style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '24px' }}>
               <div className="stat-box">
-                <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--accent-green)' }}>{totalPlayers}</div>
+                <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--accent)' }}>{totalPlayers}</div>
                 <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
                   Tổng cầu thủ
                 </div>
               </div>
               <div className="stat-box">
-                <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--accent-green-dark)' }}>{teamCount}</div>
+                <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--accent-dark)' }}>{teamCount}</div>
                 <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>
                   Số đội
                 </div>
@@ -369,7 +398,7 @@ export default function Home() {
               {matchData.teams.map((team, i) =>
                 teamCount === 2 ? (
                   <div key={team.name} style={{ display: 'contents' }}>
-                    <TeamCard team={team} index={i} playerConfigs={playerConfigs} />
+                    <TeamCard team={team} index={i} playerConfigs={playerConfigs} isDark={isDark} />
                     {i === 0 && (
                       <div className="vs-badge-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 6px', alignSelf: 'center' }}>
                         <div className="vs-badge">VS</div>
@@ -377,7 +406,7 @@ export default function Home() {
                     )}
                   </div>
                 ) : (
-                  <TeamCard key={team.name} team={team} index={i} playerConfigs={playerConfigs} />
+                  <TeamCard key={team.name} team={team} index={i} playerConfigs={playerConfigs} isDark={isDark} />
                 )
               )}
             </div>

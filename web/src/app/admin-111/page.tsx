@@ -157,10 +157,10 @@ export default function AdminPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f4f8f4', fontFamily: 'Outfit, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: '#faf5f5', fontFamily: 'Outfit, sans-serif' }}>
       {/* Header */}
       <div style={{
-        background: 'linear-gradient(135deg, #1b5e20, #43a047)',
+        background: 'linear-gradient(135deg, #8e0000, #e53935)',
         padding: '20px 32px', color: 'white',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
@@ -188,20 +188,20 @@ export default function AdminPage() {
         {/* ==================== */}
         <div style={{
           background: 'white', borderRadius: '14px', padding: '20px 24px',
-          marginBottom: '20px', border: '1px solid rgba(46,125,50,0.1)',
-          boxShadow: '0 2px 8px rgba(46,125,50,0.05)',
+          marginBottom: '20px', border: '1px solid rgba(198,40,40,0.1)',
+          boxShadow: '0 2px 8px rgba(198,40,40,0.05)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#2e7d32', margin: 0 }}>
+            <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#c62828', margin: 0 }}>
               Thông tin sân bóng
             </h2>
             {venueStatus && (
-              <span style={{ fontSize: '12px', color: '#43a047', fontWeight: 600 }}>{venueStatus}</span>
+              <span style={{ fontSize: '12px', color: '#e53935', fontWeight: 600 }}>{venueStatus}</span>
             )}
           </div>
 
           {venueLoading ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#8aaa8a' }}>Đang tải...</div>
+            <div style={{ padding: '20px', textAlign: 'center', color: '#8a8aaa' }}>Đang tải...</div>
           ) : (
             <>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '12px' }}>
@@ -263,10 +263,10 @@ export default function AdminPage() {
         {/* ==================== */}
         <div style={{
           background: 'white', borderRadius: '14px', padding: '20px 24px',
-          marginBottom: '20px', border: '1px solid rgba(46,125,50,0.1)',
-          boxShadow: '0 2px 8px rgba(46,125,50,0.05)',
+          marginBottom: '20px', border: '1px solid rgba(198,40,40,0.1)',
+          boxShadow: '0 2px 8px rgba(198,40,40,0.05)',
         }}>
-          <h2 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '14px', color: '#2e7d32' }}>
+          <h2 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '14px', color: '#c62828' }}>
             Thêm cầu thủ mới
           </h2>
           <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
@@ -330,28 +330,28 @@ export default function AdminPage() {
         {/* ==================== */}
         <div style={{
           background: 'white', borderRadius: '14px', overflow: 'hidden',
-          border: '1px solid rgba(46,125,50,0.1)',
-          boxShadow: '0 2px 8px rgba(46,125,50,0.05)',
+          border: '1px solid rgba(198,40,40,0.1)',
+          boxShadow: '0 2px 8px rgba(198,40,40,0.05)',
         }}>
           <div style={{
-            padding: '14px 24px', borderBottom: '1px solid rgba(46,125,50,0.08)',
+            padding: '14px 24px', borderBottom: '1px solid rgba(198,40,40,0.08)',
           }}>
-            <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#1a2e1a', margin: 0 }}>
+            <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
               Danh sách cầu thủ ({players.length})
             </h2>
           </div>
 
           {loading ? (
-            <div style={{ padding: '40px', textAlign: 'center', color: '#8aaa8a' }}>Đang tải...</div>
+            <div style={{ padding: '40px', textAlign: 'center', color: '#8a8aaa' }}>Đang tải...</div>
           ) : players.length === 0 ? (
-            <div style={{ padding: '48px', textAlign: 'center', color: '#8aaa8a' }}>
+            <div style={{ padding: '48px', textAlign: 'center', color: '#8a8aaa' }}>
               <p style={{ fontSize: '15px' }}>Chưa có cầu thủ nào</p>
               <p style={{ fontSize: '13px', marginTop: '4px' }}>Thêm cầu thủ đầu tiên ở form bên trên</p>
             </div>
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: 'rgba(46,125,50,0.03)' }}>
+                <tr style={{ background: 'rgba(198,40,40,0.03)' }}>
                   <th style={{ ...thStyle, width: '40px' }}>#</th>
                   <th style={{ ...thStyle, width: '60px' }}>Số áo</th>
                   <th style={{ ...thStyle, textAlign: 'left', paddingLeft: '16px' }}>Tên</th>
@@ -362,7 +362,7 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {players.map((player, idx) => (
-                  <tr key={player.id} style={{ borderBottom: '1px solid rgba(46,125,50,0.05)' }}>
+                  <tr key={player.id} style={{ borderBottom: '1px solid rgba(198,40,40,0.05)' }}>
                     {editingId === player.id && editForm ? (
                       <>
                         <td style={tdCenter}>{idx + 1}</td>
@@ -406,25 +406,25 @@ export default function AdminPage() {
                     ) : (
                       <>
                         <td style={tdCenter}>
-                          <span style={{ color: '#8aaa8a', fontSize: '13px' }}>{idx + 1}</span>
+                          <span style={{ color: '#8a8aaa', fontSize: '13px' }}>{idx + 1}</span>
                         </td>
                         <td style={tdCenter}>
                           <span style={{
                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                             width: '34px', height: '34px', borderRadius: '50%',
-                            background: 'linear-gradient(135deg, #43a047, #66bb6a)',
+                            background: 'linear-gradient(135deg, #e53935, #ef5350)',
                             color: 'white', fontWeight: 800, fontSize: '14px',
                           }}>
                             {player.jerseyNumber}
                           </span>
                         </td>
-                        <td style={{ ...tdLeft, fontWeight: 600, color: '#1a2e1a' }}>{player.name}</td>
+                        <td style={{ ...tdLeft, fontWeight: 600, color: '#1a1a2e' }}>{player.name}</td>
                         <td style={tdLeft}>
                           <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                             {player.subNames.map((sub, i) => (
                               <span key={i} style={{
                                 padding: '3px 10px', borderRadius: '6px',
-                                background: 'rgba(46,125,50,0.08)', color: '#2e7d32',
+                                background: 'rgba(198,40,40,0.08)', color: '#c62828',
                                 fontSize: '12px', fontWeight: 500,
                               }}>
                                 {sub}
@@ -465,23 +465,23 @@ export default function AdminPage() {
 /* ========== STYLES ========== */
 
 const labelStyle: React.CSSProperties = {
-  fontSize: '11px', fontWeight: 600, color: '#4a6a4a',
+  fontSize: '11px', fontWeight: 600, color: '#4a4a6a',
   display: 'block', marginBottom: '4px', textTransform: 'uppercase',
   letterSpacing: '0.5px',
 };
 
 const inputStyle: React.CSSProperties = {
   width: '100%', padding: '10px 14px', borderRadius: '10px',
-  border: '1.5px solid rgba(46,125,50,0.15)', background: '#fafff9',
+  border: '1.5px solid rgba(198,40,40,0.15)', background: '#fffafa',
   fontSize: '14px', fontFamily: 'Outfit, sans-serif', outline: 'none',
-  color: '#1a2e1a', transition: 'border-color 0.2s',
+  color: '#1a1a2e', transition: 'border-color 0.2s',
 };
 
 const inputCompact: React.CSSProperties = {
   padding: '7px 10px', borderRadius: '8px',
-  border: '1.5px solid rgba(46,125,50,0.2)', background: '#fafff9',
+  border: '1.5px solid rgba(198,40,40,0.2)', background: '#fffafa',
   fontSize: '13px', fontFamily: 'Outfit, sans-serif', outline: 'none',
-  color: '#1a2e1a',
+  color: '#1a1a2e',
 };
 
 const btnBase: React.CSSProperties = {
@@ -493,7 +493,7 @@ const btnBase: React.CSSProperties = {
 const btnPrimary: React.CSSProperties = {
   ...btnBase,
   padding: '10px 24px', borderRadius: '10px',
-  background: 'linear-gradient(135deg, #43a047, #66bb6a)',
+  background: 'linear-gradient(135deg, #e53935, #ef5350)',
   color: 'white', fontSize: '14px',
 };
 
@@ -506,7 +506,7 @@ const btnDelete: React.CSSProperties = {
 };
 
 const btnSave: React.CSSProperties = {
-  ...btnBase, background: '#e8f5e9', color: '#2e7d32',
+  ...btnBase, background: '#ffebee', color: '#c62828',
 };
 
 const btnCancel: React.CSSProperties = {
@@ -515,8 +515,8 @@ const btnCancel: React.CSSProperties = {
 
 const thStyle: React.CSSProperties = {
   padding: '12px 12px', fontSize: '11px', fontWeight: 700,
-  textTransform: 'uppercase', letterSpacing: '0.8px', color: '#6a8a6a',
-  textAlign: 'center', borderBottom: '1px solid rgba(46,125,50,0.08)',
+  textTransform: 'uppercase', letterSpacing: '0.8px', color: '#6a6a8a',
+  textAlign: 'center', borderBottom: '1px solid rgba(198,40,40,0.08)',
 };
 
 const tdCenter: React.CSSProperties = {
