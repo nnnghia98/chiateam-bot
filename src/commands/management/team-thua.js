@@ -47,7 +47,9 @@ module.exports = (getTiensan, getTiennuoc, getTeamThua, setTeamThua, { teamA, te
       `*${loserName}:*\n${loserMembers}\n\n` +
       `=> \n` +
       `*${winnerName}:* ${formatMoney(winnerTotal)}\n` +
-      `*${loserName}:* ${formatMoney(perMember)} + ${formatMoney(waterPerLoser)}=${formatMoney(loserTotal)}`;
+      `*${loserName}:* ${formatMoney(perMember)} + ${formatMoney(waterPerLoser)}=${formatMoney(loserTotal)}\n\n` +
+      `0905889885 Momo, zalopay, shopeefood, lazada, tiki, ...\n` +
+      `8888220198 Techcombank`;
 
     sendMessage({
       msg,
