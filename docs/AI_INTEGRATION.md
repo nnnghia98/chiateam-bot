@@ -175,13 +175,13 @@ When deploying to production:
 1. **Update `.env` in production** with the API key:
 
    ```bash
-   GEMINI_API_KEY=AIzaSyA8iuL5dLNPsd4H5w6Aj79Nz_D3TWJ4kAs
+   GEMINI_API_KEY=your_google_ai_studio_key
    ```
 
 2. **Restart the bot**:
 
    ```bash
-   npm run start:production
+   yarn start:bot
    ```
 
 3. **Monitor API usage** at [Google AI Studio](https://aistudio.google.com/)
